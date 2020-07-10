@@ -1,29 +1,32 @@
 package com.challenge.entity;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private Long id;
+    private Integer id;
     
-    @Column
+    @Column(length = 100)
     private String fullName;
     
-    @Column
+    @Column(length = 100)
     private String email;
     
-    @Column
+    @Column(length = 50)
     private String nickname;
     
-    @Column
+    @Column(length = 255)
     private String password;
     
     @Column
