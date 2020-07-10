@@ -3,24 +3,22 @@ package com.challenge.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Integer id;
@@ -40,16 +38,9 @@ public class User implements Serializable {
     @Column
     private Timestamp createdAt;
     
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "submission",
-            joinColumns = {
-                    @JoinColumn(name = "user_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "challenge_id", referencedColumnName = "id",
-                            nullable = false, updatable = false)})
-    private Set<Challenge> submissions = new HashSet<>();
-
+    @OneToMany(mappedBy = "user")
+    private Set<Submission> submissions;
+    
     public User() {
     }
 
@@ -108,15 +99,6 @@ public class User implements Serializable {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
-//
-//    public Set<Challenge> getChallenges() {
-//        return challenges;
-//    }
-//
-//    public void setChallenges(Set<Challenge> challenges) {
-//        this.challenges = challenges;
-//    }
-
     
     @Override
     public int hashCode() {
@@ -124,14 +106,6 @@ public class User implements Serializable {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
-    }
-
-    public Set<Challenge> getSubmissions() {
-        return submissions;
-    }
-
-    public void setSubmissions(Set<Challenge> submissions) {
-        this.submissions = submissions;
     }
 
     @Override

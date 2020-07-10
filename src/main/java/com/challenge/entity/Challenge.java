@@ -2,21 +2,21 @@ package com.challenge.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "challenge")
 public class Challenge implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -31,8 +31,8 @@ public class Challenge implements Serializable {
     @Column
     private Timestamp createdAt;
     
-    @ManyToMany(mappedBy = "submissions", fetch = FetchType.LAZY)
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "challenge")
+    private Set<Submission> submissions;
 
     public Challenge() {
     }
@@ -74,14 +74,6 @@ public class Challenge implements Serializable {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     @Override
