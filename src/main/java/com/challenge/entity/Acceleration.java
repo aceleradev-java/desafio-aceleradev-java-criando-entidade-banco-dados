@@ -2,46 +2,46 @@ package com.challenge.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "challenge")
-public class Challenge implements Serializable {
+@Table(name = "acceleration")
+public class Acceleration implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     
-    @Column(length=100)
+    @Column(length = 100)
     private String name;
     
-    @Column(length=50)
+    @Column(length = 50)
     private String slug;
     
     @Column
     private Timestamp createdAt;
     
-    @OneToMany(mappedBy = "challenge")
-    private Set<Submission> submissions;
-    
-    @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Acceleration> accelerations;
+    @ManyToOne
+    @JoinColumn(name = "challenge_id",
+        foreignKey = @ForeignKey
+    )
+    private Challenge challenge;
 
-    public Challenge() {
+    public Acceleration() {
     }
 
-    public Challenge(Integer id, String name, String slug, Timestamp createdAt) {
+    public Acceleration(Integer id, String name, String slug, Timestamp createdAt) {
         this.id = id;
         this.name = name;
         this.slug = slug;
@@ -96,7 +96,7 @@ public class Challenge implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Challenge other = (Challenge) obj;
+        Acceleration other = (Acceleration) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -107,7 +107,7 @@ public class Challenge implements Serializable {
 
     @Override
     public String toString() {
-        return "Challenge [id=" + id + ", name=" + name + ", slug=" + slug + ", createdAt=" + createdAt + "]";
+        return "Acceleration [id=" + id + ", name=" + name + ", slug=" + slug + ", createdAt=" + createdAt + "]";
     }
-    
+
 }
