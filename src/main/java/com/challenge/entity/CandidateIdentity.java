@@ -2,63 +2,61 @@ package com.challenge.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 
 @Embeddable
 public class CandidateIdentity  implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    
-    @Column(name="user_id")
-    private Integer userId;
-    
-    @Column(name="acceleration_id")
-    private Integer accelerationId;
-    
-    @Column(name="company_id")
-    private Integer companyId;
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Acceleration acceleration;
+
+    @ManyToOne
+    private Company company;
 
     public CandidateIdentity() {
     }
 
-    public CandidateIdentity(Integer userId, Integer accelerationId, Integer companyId) {
-        this.userId = userId;
-        this.accelerationId = accelerationId;
-        this.companyId = companyId;
+    public CandidateIdentity(User user, Acceleration acceleration, Company company) {
+        this.user = user;
+        this.acceleration = acceleration;
+        this.company = company;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getAccelerationId() {
-        return accelerationId;
+    public Acceleration getAcceleration() {
+        return acceleration;
     }
 
-    public void setAccelerationId(Integer accelerationId) {
-        this.accelerationId = accelerationId;
+    public void setAcceleration(Acceleration acceleration) {
+        this.acceleration = acceleration;
     }
 
-    public Integer getCompanyId() {
-        return companyId;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((accelerationId == null) ? 0 : accelerationId.hashCode());
-        result = prime * result + ((companyId == null) ? 0 : companyId.hashCode());
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((acceleration == null) ? 0 : acceleration.hashCode());
+        result = prime * result + ((company == null) ? 0 : company.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
@@ -71,28 +69,27 @@ public class CandidateIdentity  implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         CandidateIdentity other = (CandidateIdentity) obj;
-        if (accelerationId == null) {
-            if (other.accelerationId != null)
+        if (acceleration == null) {
+            if (other.acceleration != null)
                 return false;
-        } else if (!accelerationId.equals(other.accelerationId))
+        } else if (!acceleration.equals(other.acceleration))
             return false;
-        if (companyId == null) {
-            if (other.companyId != null)
+        if (company == null) {
+            if (other.company != null)
                 return false;
-        } else if (!companyId.equals(other.companyId))
+        } else if (!company.equals(other.company))
             return false;
-        if (userId == null) {
-            if (other.userId != null)
+        if (user == null) {
+            if (other.user != null)
                 return false;
-        } else if (!userId.equals(other.userId))
+        } else if (!user.equals(other.user))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "CandidateIdentity [userId=" + userId + ", accelerationId=" + accelerationId + ", companyId=" + companyId
-                + "]";
+        return "CandidateIdentity [user=" + user + ", acceleration=" + acceleration + ", company=" + company + "]";
     }
     
 }
