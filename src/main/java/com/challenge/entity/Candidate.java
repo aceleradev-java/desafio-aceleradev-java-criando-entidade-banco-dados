@@ -6,9 +6,6 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 
 @Entity
 public class Candidate implements Serializable {
@@ -23,21 +20,6 @@ public class Candidate implements Serializable {
     
     @Column
     private Timestamp createdAt;
-    
-    @ManyToOne
-    @MapsId("user_id")
-    @JoinColumn(name = "user_id")
-    private User user;
-    
-    @ManyToOne
-    @MapsId("company_id")
-    @JoinColumn(name = "company_id")
-    private Company company;
-    
-    @ManyToOne
-    @MapsId("acceleration_id")
-    @JoinColumn(name = "acceleration_id")
-    private Acceleration acceleration;
 
     public Candidate() {
     }
@@ -70,30 +52,6 @@ public class Candidate implements Serializable {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public Acceleration getAcceleration() {
-        return acceleration;
-    }
-
-    public void setAcceleration(Acceleration acceleration) {
-        this.acceleration = acceleration;
     }
 
     @Override

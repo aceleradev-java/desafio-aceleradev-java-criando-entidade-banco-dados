@@ -62,7 +62,8 @@ public class User implements Serializable {
     @JoinColumn(name = "user_id")
     private Set<Submission> submissions;
     
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
     private Set<Candidate> candidates ;
     
     public User() {

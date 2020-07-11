@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -52,7 +53,8 @@ public class Acceleration implements Serializable {
     )
     private Challenge challenge;
     
-    @OneToMany(mappedBy = "acceleration")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "acceleration_id")
     private Set<Candidate> candidates ;
 
     public Acceleration() {
