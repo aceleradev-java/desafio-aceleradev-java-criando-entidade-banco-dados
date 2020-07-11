@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "acceleration")
 public class Acceleration implements Serializable {
 
@@ -26,12 +33,17 @@ public class Acceleration implements Serializable {
     private Integer id;
     
     @Column(length = 100)
+    @NotNull
+    @Size(max = 100)
     private String name;
     
     @Column(length = 50)
+    @NotNull
+    @Size(max = 50)
     private String slug;
     
-    @Column
+    @Column(updatable = false)
+    @CreatedDate
     private Timestamp createdAt;
     
     @ManyToOne
