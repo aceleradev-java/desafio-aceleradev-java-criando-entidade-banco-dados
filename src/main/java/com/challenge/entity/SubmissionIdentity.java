@@ -2,51 +2,34 @@ package com.challenge.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
 
 @Embeddable
 public class SubmissionIdentity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    @Column(name="user_id")
-    private Integer userId;
+    @ManyToOne
+    private User user;
     
-    @Column(name="challenge_id")
-    private Integer challengeId;
-    
-
-    public SubmissionIdentity(Integer userId, Integer challengeid) {
-        this.userId = userId;
-        this.challengeId = challengeid;
-    }
+    @ManyToOne
+    private Challenge challenge;
 
     public SubmissionIdentity() {
     }
 
-    public Integer getUser() {
-        return userId;
-    }
-
-    public void setUser(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getChallenge() {
-        return challengeId;
-    }
-
-    public void setChallenge(Integer challengeId) {
-        this.challengeId = challengeId;
+    public SubmissionIdentity(User user, Challenge challenge) {
+        this.user = user;
+        this.challenge = challenge;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((challengeId == null) ? 0 : challengeId.hashCode());
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        result = prime * result + ((challenge == null) ? 0 : challenge.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
@@ -59,17 +42,17 @@ public class SubmissionIdentity implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         SubmissionIdentity other = (SubmissionIdentity) obj;
-        if (challengeId == null) {
-            if (other.challengeId != null)
+        if (challenge == null) {
+            if (other.challenge != null)
                 return false;
-        } else if (!challengeId.equals(other.challengeId))
+        } else if (!challenge.equals(other.challenge))
             return false;
-        if (userId == null) {
-            if (other.userId != null)
+        if (user == null) {
+            if (other.user != null)
                 return false;
-        } else if (!userId.equals(other.userId))
+        } else if (!user.equals(other.user))
             return false;
         return true;
     }
-
+    
 }
