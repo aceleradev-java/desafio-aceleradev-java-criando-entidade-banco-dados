@@ -6,11 +6,17 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Submission implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,15 +25,12 @@ public class Submission implements Serializable {
     private SubmissionIdentity id;
     
     @Column
+    @NotNull
     private Float score;
     
     @Column
+    @CreatedDate
     private Timestamp createdAt;
-    
-    @ManyToOne
-    @MapsId("user_id")
-    @JoinColumn(name = "user_id")
-    private User user;
     
     @ManyToOne
     @MapsId("challenge_id")
@@ -65,14 +68,6 @@ public class Submission implements Serializable {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Challenge getChallenge() {
