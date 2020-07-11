@@ -7,9 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -32,11 +29,6 @@ public class Submission implements Serializable {
     @CreatedDate
     private Timestamp createdAt;
     
-    @ManyToOne
-    @MapsId("challenge_id")
-    @JoinColumn(name = "challenge_id")
-    private Challenge challenge;
-
     public Submission() {
     }
 
@@ -70,12 +62,4 @@ public class Submission implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Challenge getChallenge() {
-        return challenge;
-    }
-
-    public void setChallenge(Challenge challenge) {
-        this.challenge = challenge;
-    }
-    
 }

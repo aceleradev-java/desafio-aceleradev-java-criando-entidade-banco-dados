@@ -11,6 +11,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -44,7 +45,8 @@ public class Challenge implements Serializable {
     @CreatedDate
     private Timestamp createdAt;
     
-    @OneToMany(mappedBy = "challenge")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "challenge_id")
     private Set<Submission> submissions;
     
 
