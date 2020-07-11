@@ -2,6 +2,7 @@ package com.challenge.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +39,9 @@ public class Acceleration implements Serializable {
         foreignKey = @ForeignKey
     )
     private Challenge challenge;
+    
+    @OneToMany(mappedBy = "acceleration")
+    private Set<Candidate> candidates ;
 
     public Acceleration() {
     }
@@ -78,6 +83,22 @@ public class Acceleration implements Serializable {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Challenge getChallenge() {
+        return challenge;
+    }
+
+    public void setChallenge(Challenge challenge) {
+        this.challenge = challenge;
+    }
+
+    public Set<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(Set<Candidate> candidates) {
+        this.candidates = candidates;
     }
 
     @Override

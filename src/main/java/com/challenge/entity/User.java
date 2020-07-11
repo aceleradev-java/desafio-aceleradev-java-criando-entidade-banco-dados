@@ -41,6 +41,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private Set<Submission> submissions;
     
+    @OneToMany(mappedBy = "user")
+    private Set<Candidate> candidates ;
+    
     public User() {
     }
 
@@ -100,6 +103,22 @@ public class User implements Serializable {
         this.createdAt = createdAt;
     }
     
+    public Set<Submission> getSubmissions() {
+        return submissions;
+    }
+
+    public void setSubmissions(Set<Submission> submissions) {
+        this.submissions = submissions;
+    }
+
+    public Set<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(Set<Candidate> candidates) {
+        this.candidates = candidates;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
