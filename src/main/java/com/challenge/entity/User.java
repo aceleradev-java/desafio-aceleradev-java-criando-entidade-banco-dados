@@ -22,9 +22,14 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "user")
+@Getter
+@Setter
 public class User implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -75,70 +80,6 @@ public class User implements Serializable {
         this.nickname = nickname;
         this.password = password;
         this.createdAt = createdAt;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-    
-    public Set<Submission> getSubmissions() {
-        return submissions;
-    }
-
-    public void setSubmissions(Set<Submission> submissions) {
-        this.submissions = submissions;
-    }
-
-    public Set<Candidate> getCandidates() {
-        return candidates;
-    }
-
-    public void setCandidates(Set<Candidate> candidates) {
-        this.candidates = candidates;
     }
 
     @Override

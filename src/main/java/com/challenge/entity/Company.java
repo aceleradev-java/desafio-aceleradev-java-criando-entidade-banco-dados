@@ -20,9 +20,14 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "company")
+@Getter
+@Setter
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,38 +62,6 @@ public class Company implements Serializable {
         this.id = id;
         this.name = name;
         this.slug = slug;
-        this.createdAt = createdAt;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 

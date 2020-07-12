@@ -22,9 +22,14 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "acceleration")
+@Getter
+@Setter
 public class Acceleration implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,7 +61,7 @@ public class Acceleration implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "acceleration_id")
     private Set<Candidate> candidates ;
-
+    
     public Acceleration() {
     }
 
@@ -65,84 +70,6 @@ public class Acceleration implements Serializable {
         this.name = name;
         this.slug = slug;
         this.createdAt = createdAt;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Challenge getChallenge() {
-        return challenge;
-    }
-
-    public void setChallenge(Challenge challenge) {
-        this.challenge = challenge;
-    }
-
-    public Set<Candidate> getCandidates() {
-        return candidates;
-    }
-
-    public void setCandidates(Set<Candidate> candidates) {
-        this.candidates = candidates;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Acceleration other = (Acceleration) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Acceleration [id=" + id + ", name=" + name + ", slug=" + slug + ", createdAt=" + createdAt + "]";
     }
 
 }

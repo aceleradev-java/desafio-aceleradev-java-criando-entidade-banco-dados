@@ -13,9 +13,14 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "candidate")
+@Getter
+@Setter
 public class Candidate implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,6 +35,5 @@ public class Candidate implements Serializable {
     @Column(updatable = false)
     @CreatedDate
     private Timestamp createdAt;
-
   
 }
